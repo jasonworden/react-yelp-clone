@@ -1,10 +1,10 @@
 import axios from 'axios'
 import {searchNearby, getDetails} from 'utils/googleApiHelpers'
 
-const FETCH_NEARBY_PLACES = 'FETCH_NEARBY_PLACES';
-const FETCH_PLACE_DETAILS = 'FETCH_PLACE_DETAILS';
+export const FETCH_NEARBY_PLACES = 'FETCH_NEARBY_PLACES';
+export const FETCH_PLACE_DETAILS = 'FETCH_PLACE_DETAILS';
 
-export function fetchNearbyPlaces(google, map, request) {
+export function fetchNearbyPlaces(google, map, params) {
   var request = searchNearby(...arguments);
 
   return {

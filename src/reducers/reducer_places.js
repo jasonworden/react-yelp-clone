@@ -7,18 +7,18 @@ const INITIAL_STATE = {
 
 export default function(state=INITIAL_STATE, action) {
   switch (action.type) {
-  case FETCH_PLACE_DETAILS:
-    console.log('payload': action.payload);
-    return {
-      ...state,
-      current: action.payload.data
-    }
   case FETCH_NEARBY_PLACES:
-    console.log('payload': action.payload);
+    debugger
+    console.log('payload for nearby places': action.payload);
     return {
       ...state,
-      all: action.payload.data
-      // pagination: action
+      all: action.payload
+    };
+  case FETCH_PLACE_DETAILS:
+    console.log('payload for fetch details': action.payload);
+    return {
+      ...state,
+      current: action.payload
     };
   default:
     return state;

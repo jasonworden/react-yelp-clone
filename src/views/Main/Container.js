@@ -11,7 +11,7 @@ const mapStateToProps = state => {
   return {
     places: state.places.all,
     currentPlace: state.places.current
-  }
+  };
 }
 
 export default connect(mapStateToProps, {
