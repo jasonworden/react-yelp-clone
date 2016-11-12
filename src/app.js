@@ -7,7 +7,6 @@ import './app.css'
 
 import routes from './routes'
 
-ReactDOM.render(
-  <Router history={browserHistory} routes={routes} />,
-  document.querySelector('#root')
-);
+const router = <Router history={browserHistory} routes={routes} />;
+
+ReactDOM.render(router, document.querySelector('#root'));
