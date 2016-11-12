@@ -1,18 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {Router, hashHistory} from 'react-router'
 
 import 'font-awesome/css/font-awesome.css'
 import './app.css'
 
-import App from 'containers/App/App'
+import routes from './routes'
 
-import {hashHistory} from 'react-router'
-import makeRoutes from './routes'
-
-const routes = makeRoutes()
-
-const mountNode = document.querySelector('#root');
 ReactDOM.render(
-  <App history={hashHistory}
-        routes={routes} />,
-mountNode);
+  <Router history={hashHistory} routes={routes} />,
+  document.querySelector('#root')
+);
