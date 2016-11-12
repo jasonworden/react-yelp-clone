@@ -1,6 +1,7 @@
-import React, { PropTypes as T } from 'react'
+import React, { Component, PropTypes as T } from 'react'
 import Map, {GoogleApiWrapper} from 'google-maps-react'
 import {searchNearby} from 'utils/googleApiHelpers'
+// import {searchNearby} from '../../actions'
 
 
 import Header from 'components/Header/Header'
@@ -8,7 +9,7 @@ import Sidebar from 'components/Sidebar/Sidebar'
 
 import styles from './styles.module.css'
 
-export class Container extends React.Component {
+class MapsContainer extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -33,7 +34,7 @@ export class Container extends React.Component {
         pagination
       })
     }).catch((status) => {
-      console.log('error fetching nearby', status)
+      console.error('error fetching nearby', status)
     })
   }
 
@@ -60,31 +61,31 @@ export class Container extends React.Component {
     }
 
     return (
-        <Map
-          google={this.props.google}
-          onReady={this.onReady.bind(this)}
-          visible={false}
-          className={styles.wrapper}>
-          <Header />
+      <Map
+        google={this.props.google}
+        onReady={this.onReady.bind(this)}
+        visible={false}
+        className={styles.wrapper}
+      >
+        <Header />
 
-          <Sidebar
-              title={'Restaurants'}
-              onListItemClick={this.onMarkerClick.bind(this)}
-              places={this.state.places} />
+        <Sidebar
+            title={'Restaurants'}
+            onListItemClick={this.onMarkerClick.bind(this)}
+            places={this.state.places} />
 
-          <div className={styles.content}>
-            {children}
-          </div>
-
-        </Map>
+        <div className={styles.content}>
+          {children}
+        </div>
+      </Map>
     )
   }
 }
 
-Container.contextTypes = {
+MapsContainer.contextTypes = {
   router: T.object
 }
 
 export default GoogleApiWrapper({
   apiKey: __GAPI_KEY__
-})(Container)
+})(MapsContainer)

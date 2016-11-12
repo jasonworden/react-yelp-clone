@@ -1,12 +1,12 @@
 import React from 'react'
 import {Route, IndexRoute} from 'react-router'
-import Container from './Container'
+import MapsContainer from './MapsContainer'
 
 import Map from './Map/Map'
 import Detail from './Detail/Detail'
 
 export const mainRoutes = (
-  <Route path="/" component={Container}>
+  <Route path="/" component={MapsContainer}>
     <IndexRoute component={Map} />
 
     <Route path="map" component={Map}>

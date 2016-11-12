@@ -99,6 +99,8 @@ config.postcss = [].concat([
 // Roots
 config.resolve.root = [src, modules]
 config.resolve.alias = {
+  'actions': join(src, 'actions'),
+  'reducers': join(src, 'reducers'),
   'css': join(src, 'styles'),
   'containers': join(src, 'containers'),
   'components': join(src, 'components'),
