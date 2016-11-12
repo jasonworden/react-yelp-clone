@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchNearbyPlaces, fetchPlaceDetails} from 'actions/actions'
+import MapsContainer from 'views/Main/MapsContainer'
 
 const Container = (props) => (
   <MapsContainer {...props} />
