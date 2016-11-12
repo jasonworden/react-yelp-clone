@@ -1,24 +1,41 @@
-import {FETCH_NEARBY_PLACES, FETCH_PLACE_DETAILS} from 'actions/actions'
+import {
+  FETCH_NEARBY_PLACES,
+  FETCH_PLACE_DETAILS,
+  FETCH_PLACE_DETAILS__BEGIN
+} from 'actions/actions'
 
 const INITIAL_STATE = {
   all: [],
-  current: null
+  detail: {
+    loading: true,
+    place: {},
+    location: {}
+  }
 };
 
 export default function(state=INITIAL_STATE, action) {
   switch (action.type) {
   case FETCH_NEARBY_PLACES:
-    debugger
-    console.log('payload for nearby places': action.payload);
     return {
       ...state,
       all: action.payload
     };
-  case FETCH_PLACE_DETAILS:
-    console.log('payload for fetch details': action.payload);
+  case FETCH_PLACE_DETAILS__BEGIN:
     return {
       ...state,
-      current: action.payload
+      detail: INITIAL_STATE.detail
+    }
+  case FETCH_PLACE_DETAILS:
+    return {
+      ...state,
+      detail: {
+        loading: false,
+        place: action.payload,
+        location: {
+          lat: action.payload.geometry.location.lat(),
+          lng: action.payload.geometry.location.lng()
+        }
+      }
     };
   default:
     return state;

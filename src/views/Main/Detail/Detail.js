@@ -1,22 +1,14 @@
 import React, { PropTypes as T } from 'react'
+import {connect} from 'react-redux'
 import classnames from 'classnames'
-import {getDetails} from 'utils/googleApiHelpers'
+import {fetchPlaceDetails} from 'actions/actions'
+// import {getDetails} from 'utils/googleApiHelpers'
 
 import styles from './styles.module.css'
 
-export class Detail extends React.Component {
+class Detail extends React.Component {
   static childContextTypes = {
     router: T.object,
-  }
-
-  constructor(props, context) {
-    super(props, context)
-
-    this.state = {
-      loading: true,
-      place: {},
-      location: {}
-    }
   }
 
   componentDidMount() {
@@ -49,35 +41,17 @@ export class Detail extends React.Component {
     const {google, params} = this.props;
     const {placeId} = params;
 
-    this.setState({
-      loading: true
-    }, () => {
-      getDetails(google, map, placeId)
-        .then((place) => {
-          const {location} = place.geometry;
-          const loc = {
-            lat: location.lat(),
-            lng: location.lng()
-          }
-
-          this.setState({
-            place,
-            location: loc,
-            loading: false
-          })
-        })
-    });
+    this.props.fetchPlaceDetails(google, map, placeId);
   }
 
-
   render() {
-    if (this.state.loading) {
+    if (this.props.loading) {
       return (<div className={styles.wrapper}>
         Loading...
       </div>)
     }
 
-    const {place} = this.state;
+    const {place} = this.props;
 
     return (
       <div className={styles.wrapper}>
@@ -92,4 +66,8 @@ export class Detail extends React.Component {
   }
 }
 
-export default Detail
+const mapStateToProps = state => {
+  return state.places.detail
+}
+
+export default connect(mapStateToProps, {fetchPlaceDetails})(Detail)

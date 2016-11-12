@@ -8,10 +8,7 @@ const Container = (props) => (
 )
 
 const mapStateToProps = state => {
-  return {
-    places: state.places.all,
-    currentPlace: state.places.current
-  };
+  return { places: state.places.all };
 }
 
 export default connect(mapStateToProps, {

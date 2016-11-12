@@ -1,9 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Router, browserHistory} from 'react-router'
-import promiseMiddleware from 'redux-promise'
 import {createStore, applyMiddleware} from 'redux'
 import {Provider} from 'react-redux'
+import ReduxPromise from 'redux-promise'
+import ReduxThunk from 'redux-thunk'
 
 import 'font-awesome/css/font-awesome.css'
 import './app.css'
@@ -12,7 +13,8 @@ import routes from './routes'
 import reducers from 'reducers/index'
 
 const createStoreWithMiddleware = applyMiddleware(
-  promiseMiddleware
+  ReduxPromise,
+  ReduxThunk
 )(createStore);
 
 export const store = createStoreWithMiddleware(
